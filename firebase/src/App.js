@@ -1,7 +1,10 @@
+import Firebase from './Firebase';
+
 function App() {
   return (
     <>
-   this is a fire base !
+   <Firebase />
+
    </>
   );
 }
