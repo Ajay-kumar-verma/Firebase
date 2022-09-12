@@ -1,9 +1,9 @@
-import Firebase from './Firebase';
+import Firebase1 from './Firebase1';
 
 function App() {
   return (
     <>
-   <Firebase />
+   <Firebase1 />
 
    </>
   );
