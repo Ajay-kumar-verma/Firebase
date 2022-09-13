@@ -4,10 +4,9 @@ import services from './services'
  
 
 const Firebase1 = () => {
-useEffect(()=>{
-  getAllData();
+const [crud,setCrud]= useState(false);
 
-},[])
+ useEffect(()=>getAllData(),[]);
 
  const [fileds,setfield]=useState([]);
 
@@ -19,31 +18,24 @@ useEffect(()=>{
  console.log("formik data ",formik);
 
 
- async function  snedToFirebase(data){
-
-       if(data.name=""){
-        formik.set('data.name');
-      
-      }
-
-  services.add(data);  // is for adding filed into firebase   
+  function  snedToFirebase(data){
+      services.add(data);  // is for adding filed into firebase   
      getAllData();
-    }
+   }
+//  for sending data to server we dont need any promises or async and await 
 
 
  async function getAllData (){
   let  info = await services.getAllUsers();
   // console.log("MY DATA",info.docs[0].data(),"ID is :",info.docs[0].id);
-  console.log("fteched data ",info) 
+  // console.log("fteched data ",info) 
  const  data=info.docs.map(e=>{
-       
-    return {...e.data(),key:e.id}
+     return {...e.data(),key:e.id}
 });
     // console.log(info)
      setfield([...data]); 
     //  setfield([...info])
      return ;
-
 
 }
 const del=  async ()=>{
@@ -71,13 +63,26 @@ const getData= async ()=>{
    setfield([info.data()])
 
 }
+
+const login=()=>{
+
+  const email=formik.values.address;
+  const pswd=formik.values.id;
+
+
+}
+
+
+
+
 return (
     <>
-  <form onSubmit={formik.handleSubmit} >
-   <input type="text"  placeholder='Enter first name '  name="name" 
-   onChange={formik.handleChange}
-   value={formik.values.name}
-   onBlur={formik.handleBlur}
+   {crud && ( <>
+    <form onSubmit={formik.handleSubmit} >
+    <input type="text"  placeholder='Enter first name '  name="name" 
+    onChange={formik.handleChange}
+    value={formik.values.name}
+    onBlur={formik.handleBlur}
    
    />
    
@@ -90,7 +95,7 @@ return (
    
 
    <br/>
-   <input type="text" placeholder='ID ' name="id"  required 
+   <input type="text" placeholder='ID ' name="id"   
    onChange={formik.handleChange}
    value={formik.values.id}
    onBlur={formik.handleBlur}
@@ -101,12 +106,8 @@ return (
   <input type="button" value="delete" onClick={()=>{del()}} /> 
   <input type="button" value="update" onClick={()=>{update()}}/>
   <input type="button" value="getData" onClick={()=>{getData()}}/>
-  
     </form>
  
-< hr/>
-
-
  <div>
  {
   fileds.map(e=>{
@@ -117,13 +118,14 @@ return (
   })
  }
  
-
-
  </div>
-
-
-    </>
+</>
+)}
+ <input type="button" value="crud Operation" onClick={()=>{setCrud(true)}} /> 
+   </>
   )
 }
 
 export default Firebase1
+
+
