@@ -4,7 +4,7 @@ import services from './services'
  
 
 const Firebase1 = () => {
-const [crud,setCrud]= useState(false);
+const [crud,setCrud]= useState(true);
 
  useEffect(()=>getAllData(),[]);
 
@@ -28,7 +28,9 @@ const [crud,setCrud]= useState(false);
  async function getAllData (){
   let  info = await services.getAllUsers();
   // console.log("MY DATA",info.docs[0].data(),"ID is :",info.docs[0].id);
-  // console.log("fteched data ",info) 
+  // console.log("fteched data ",info)
+  
+  
  const  data=info.docs.map(e=>{
      return {...e.data(),key:e.id}
 });

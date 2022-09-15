@@ -4,9 +4,11 @@ import {GoogleAuth } from './Auth/GoogleAuth/GoogleAuth'
 function App() {
   return (
     <>
-   {/* <Firebase1 /> */}
-  {/* <EmailAndpswd  /> */}
+   {/* <Firebase1 />
+  <EmailAndpswd  /> */}
+
   <GoogleAuth  />
+  
    </>
   );
 }

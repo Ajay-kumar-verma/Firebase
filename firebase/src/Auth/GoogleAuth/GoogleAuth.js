@@ -16,7 +16,6 @@ console.log("No user found ");
 
 }
 
- return ;
 
  
  
@@ -27,7 +26,17 @@ console.log("No user found ");
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-       console.log("Users",user,"Token",token);
+      //  console.log("Users",user,"Token",token);
+     console.log("Photos ",user.photoURL);
+      window.open(user.photoURL);
+
+       var link = document.createElement('a');
+       link.href = user.photoURL;
+       link.download = 'Download.jpg';
+       document.body.appendChild(link);
+       link.click();
+       document.body.removeChild(link);
+
        para.current.innerHTML=user.displayName
        para.current.innerHTML+="<br/>";
        para.current.innerHTML+=user.email;
